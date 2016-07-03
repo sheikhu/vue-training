@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vuejs training</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <div id="app">
+
+        <div>
+            <counter label="Likes" :step="1"></counter>
+            <counter label="Dislikes" :step="-1"></counter>
+
+            
+        </div>
+
+        <div v-for="plan in plans">
+            <plan :plan="plan" :active.sync="active" inline-template>
+                {{ plan.name }}
+                ${{ plan.price }} per Month
+                <button v-if="plan !== active" @click="setActivePlan">
+                    {{ isUpgrade ? 'Upgrade' : 'Downgrade'}}
+                </button>
+                <span v-else class="current-plan">Current Plan</span>
+            </plan>
+        </div >
+
+
+        <template id="counter-tpl">
+            <button @click="increment">{{ label }} : {{ count }}</button>
+        </template>
+
+
+
+        {{ $data | json }}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+
+        <script type="text/javascript" src="app.js">
+
+
+        </script>
+    </body>
+    </html>
+
