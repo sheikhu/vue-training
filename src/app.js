@@ -9,7 +9,15 @@ var data = {
 
 new Vue({
     el: '#app',
-    data: data
+    data: data,
+    methods: {
+        remainingTasks: function() {
+            return this.tasks.filter(function(t) {
+                console.log(t);
+                return ! t.done;
+            });
+        }
+    }
 });
 
 Vue.config.devtools = true

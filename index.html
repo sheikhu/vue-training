@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Vuejs training</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.css">
+        <title>Vuejs training</title>
 </head>
 <body>
+    
+    <style>
+        ul.tasks-list {
+            list-style: none;
+        }
 
-    <div id="app">
+        label.done {
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="ui-container">
+        
+        <div id="app">
+       
+        <div class="ui success message" v-if="remainingTasks().length == 0">
+            <p>No tasks !</p>
+        </div>
 
-        <ul>
+        <div class="ui warning message" v-else>
+            <p>Remaining tasks - ({{ remainingTasks().length }})</p>
+        </div>
+        <ul class="tasks-list">
             <li v-for="(value, index) in tasks">
-             <input :id="'done' + index" type="checkbox" name="done" v-model="value.done"/>
-                <label id="done" :for="'done' + index" :class="{ 'done': value.done }">{{ value }}</label>
+             <div class="ui checkbox">
+                <input :id="'done' + index" type="checkbox" name="done" v-model="value.done"/>
+                <label id="done" :for="'done' + index" :class="{ 'done': value.done }">{{ value.text }}</label>
+             </div>
             </li>
 
         </ul>
+    </div>
 
-           <code>
-               <pre>{{ $data | json }}</pre>
-           </code>
     </div>
 
 
-
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
-    <script type="text/javascript" src="output/app.js">
-
-
-    </script>
+    <script type="text/javascript" src="output/app.js"></script>
 </body>
 </html>
 
