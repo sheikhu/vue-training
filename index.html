@@ -9,9 +9,9 @@
     <div id="app">
 
         <ul>
-            <li v-for="(index,t) in tasks">
-             <input id="done-{{ i}}" type="checkbox" name="done" v-model="t.done"/>
-                <label id="done" for="done-{{ i }}" :class="{ 'done': t.done }">{{ t.text }}</label>
+            <li v-for="(value, index) in tasks">
+             <input :id="'done' + index" type="checkbox" name="done" v-model="value.done"/>
+                <label id="done" :for="'done' + index" :class="{ 'done': value.done }">{{ value }}</label>
             </li>
 
         </ul>
@@ -23,10 +23,8 @@
 
 
 
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
-
-    <script type="text/javascript" src="app.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
+    <script type="text/javascript" src="output/app.js">
 
 
     </script>
