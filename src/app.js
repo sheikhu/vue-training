@@ -4,19 +4,26 @@ var data = {
         { text: 'Check design patterns', done: true },
         { text: 'Workout', done: false },
         { text: 'Got to store', done: true }
-    ]
+    ],
+
+    text: ''
 };
 
 new Vue({
     el: '#app',
     data: data,
-    methods: {
+    computed: {
         remainingTasks: function() {
             return this.tasks.filter(function(t) {
-                console.log(t);
                 return ! t.done;
             });
-        }
+        },
+
+        completedTasks: function() {
+            return this.tasks.filter(function(t) {
+                return t.done;
+            });
+        },
     }
 });
 

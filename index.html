@@ -22,12 +22,12 @@
         
         <div id="app">
        
-        <div class="ui success message" v-if="remainingTasks().length == 0">
-            <p>No tasks !</p>
+        <div class="ui success message" v-if="remainingTasks.length == 0">
+            <p>Great ... No tasks !</p>
         </div>
 
         <div class="ui warning message" v-else>
-            <p>Remaining tasks - ({{ remainingTasks().length }})</p>
+            <p>Remaining tasks - ({{ remainingTasks.length }})</p>
         </div>
         <ul class="tasks-list">
             <li v-for="(value, index) in tasks">
@@ -36,7 +36,6 @@
                 <label id="done" :for="'done' + index" :class="{ 'done': value.done }">{{ value.text }}</label>
              </div>
             </li>
-
         </ul>
     </div>
 
@@ -45,7 +44,7 @@
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
-    <script type="text/javascript" src="output/app.js"></script>
+    <script type="text/javascript" src="src/app.js"></script>
 </body>
 </html>
 
