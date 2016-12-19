@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.css">
-        <title>Vuejs training</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.css">
+    <title>Vuejs training</title>
 </head>
 <body>
-    
+
     <style>
         ul.tasks-list {
             list-style: none;
@@ -19,32 +19,58 @@
         }
     </style>
     <div class="ui-container">
-        
-        <div id="app">
-       
-        <div class="ui success message" v-if="remainingTasks.length == 0">
-            <p>Great ... No tasks !</p>
-        </div>
 
-        <div class="ui warning message" v-else>
-            <p>Remaining tasks - ({{ remainingTasks.length }})</p>
+        <div id="app">
+
+            
+
+        <div class="ui four column grid">
+
+        <div class="column">
+            
         </div>
-        <ul class="tasks-list">
-            <li v-for="(value, index) in tasks">
-             <div class="ui checkbox">
-                <input :id="'done' + index" type="checkbox" name="done" v-model="value.done"/>
-                <label id="done" :for="'done' + index" :class="{ 'done': value.done }">{{ value.text }}</label>
-             </div>
+            <div class="column">
+                <div class="ui success message" v-if="remainingTasks.length == 0">
+                <p>Great ... No tasks !</p>
+            </div>
+
+            <div class="ui warning message" v-else>
+                <p>Remaining tasks - ({{ remainingTasks.length }})</p>
+            </div>
+            <ul class="tasks-list">
+                <li v-for="(v, index) in tasks">
+                 <div class="ui checkbox">
+                    <input :id="'done' + index" type="checkbox" name="done" v-model="v.done"/>
+                    <label style="display:inline-block;" id="done" :for="'done' + index" :class="{ 'done': v.done }">
+                    {{ v.text | capitalize }}</label>
+
+                    <a href="#" @click="deleteTask(index)">x</a>
+                </div>
             </li>
         </ul>
+            </div>
+
+            <div class="column">
+                <form class="ui form" @submit.prevent="createTask(task)">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" name="text" v-model="task.text" placeholder="First Name" v-autofocus/>
+                    </div>
+                    <button class="ui button" type="submit">Create task</button>
+
+                </form>
+            </div>
+
+            <div class="column"></div>
+        </div>
     </div>
 
-    </div>
+</div>
 
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
-    <script type="text/javascript" src="src/app.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
+<script type="text/javascript" src="src/app.js"></script>
 </body>
 </html>
 
