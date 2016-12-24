@@ -1,76 +1,89 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.css">
-    <title>Vuejs training</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.css">
+  <title>Vuejs training</title>
 </head>
+
 <body>
 
-    <style>
-        ul.tasks-list {
-            list-style: none;
-        }
+<style>
+ul.tasks-list {
+  list-style: none;
+}
 
-        label.done {
-            text-decoration: line-through;
-        }
-    </style>
-    <div class="ui-container">
+label.done {
+  text-decoration: line-through;
+}
+</style>
+<div class="ui-container">
 
-        <div id="app">
+  <div id="app">
 
-            
+    <div class="ui four column grid">
 
-        <div class="ui four column grid">
+      <div class="column">
 
-        <div class="column">
-            
-        </div>
-            <div class="column">
-                <div class="ui success message" v-if="remainingTasks.length == 0">
-                <p>Great ... No tasks !</p>
+      </div>
+      <div class="column">
+
+        <alert @close="hide" type="success" header="Great" message="No tasks !" v-if="remainingTasks.length == 0">
+
+        </alert>
+        <alert @close="hide" type="warning" header="Warning" message="remainingTasks.length" v-else>
+
+        </alert>
+        <alert @close="hide" type="error" header="Error" message="Visibility" v-if="visible || remainingTasks.length == 0">
+
+        </alert>
+        <ul class="tasks-list">
+          <li v-for="(v, index) in tasks">
+            <div class="ui checkbox">
+              <input :id="'done-' + index" type="checkbox" name="done" v-model="v.done" />
+              <label style="display:inline-block;" id="done" :for="'done-' + index" :class="{ 'done': v.done }">
+                {{ v.text | capitalize }}
+              </label>
+
+              <i class="icon close" href="#" @click="deleteTask(index)"></i>
             </div>
-
-            <div class="ui warning message" v-else>
-                <p>Remaining tasks - ({{ remainingTasks.length }})</p>
-            </div>
-            <ul class="tasks-list">
-                <li v-for="(v, index) in tasks">
-                 <div class="ui checkbox">
-                    <input :id="'done' + index" type="checkbox" name="done" v-model="v.done"/>
-                    <label style="display:inline-block;" id="done" :for="'done' + index" :class="{ 'done': v.done }">
-                    {{ v.text | capitalize }}</label>
-
-                    <a href="#" @click="deleteTask(index)">x</a>
-                </div>
-            </li>
+          </li>
         </ul>
-            </div>
+      </div>
 
-            <div class="column">
-                <form class="ui form" @submit.prevent="createTask(task)">
-                    <div class="field">
-                        <label>First Name</label>
-                        <input type="text" name="text" v-model="task.text" placeholder="First Name" v-autofocus/>
-                    </div>
-                    <button class="ui button" type="submit">Create task</button>
+      <div class="column">
+        <form class="ui form" @submit.prevent="createTask(task)">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" name="text" v-model="task.text" placeholder="First Name" v-autofocus/>
+          </div>
+          <button class="ui button" type="submit">Create task</button>
 
-                </form>
-            </div>
+        </form>
+      </div>
 
-            <div class="column"></div>
-        </div>
+      <div class="column"></div>
     </div>
+  </div>
 
 </div>
 
 
+<script type="text/x-template" id="alert">
+  <div class="ui message" :class="type">
+    <i class="icon close" @click.prevent="close"></i>
+    <div class="header">{{ header }}</div>
+    {{ message }}
+  </div>
+</script>
+
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
+<script type="text/javascript" src="src/components.js"></script>
 <script type="text/javascript" src="src/app.js"></script>
 </body>
-</html>
 
+</html>

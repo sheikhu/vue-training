@@ -1,53 +1,65 @@
-
 var data = {
-    tasks : [
-        { text: 'Check design patterns', done: true },
-        { text: 'Workout', done: false },
-        { text: 'Got to store', done: true }
-    ],
+  tasks: [{
+    text: 'Check design patterns',
+    done: true
+  }, {
+    text: 'Workout',
+    done: false
+  }, {
+    text: 'Got to store',
+    done: true
+  }],
 
-    task: {},
+  task: {},
 
-    text: ''
+  visible: true
 };
 
 Vue.filter('capitalize', function(value) {
-    return value.toUpperCase();
+  return value.toUpperCase();
 });
 
 Vue.directive('autofocus', {
-    inserted: function(el) {
-        el.focus();
-    }
+  inserted: function(el) {
+    el.focus();
+  }
 })
 
 var vm = new Vue({
-    el: '#app',
-    data: data,
+  el: '#app',
+  data: data,
 
-    methods: {
-        createTask: function(task) {
-            this.task.done = false;
-            this.tasks.push(task);
-            this.task = {};
-        },
-        deleteTask: function(i) {
-            this.tasks.splice(i, 1);
-        }
+  methods: {
+
+    mounted: function() {
+      console.log(this.visible)
     },
-    computed: {
-        remainingTasks: function() {
-            return this.tasks.filter(function(t) {
-                return ! t.done;
-            });
-        },
+    createTask: function(task) {
+      this.task.done = false;
+      this.tasks.push(task);
+      this.task = {};
+    },
+    deleteTask: function(i) {
+      this.tasks.splice(i, 1);
+    },
 
-        completedTasks: function() {
-            return this.tasks.filter(function(t) {
-                return t.done;
-            });
-        },
+    hide: function() {
+      this.visible = false;
     }
+  },
+  computed: {
+    remainingTasks: function() {
+      return this.tasks.filter(function(t) {
+        return !t.done;
+      });
+    },
+
+    completedTasks: function() {
+      return this.tasks.filter(function(t) {
+        return t.done;
+      });
+    },
+  }
 });
 
 Vue.config.devtools = true
