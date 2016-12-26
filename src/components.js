@@ -10,7 +10,7 @@ Vue.component('alert', {
         dismissible: Boolean
     },
 
-    data: function() {
+    data() {
       return {
         visible: true
       }
@@ -18,7 +18,6 @@ Vue.component('alert', {
 
     methods: {
         close: function() {
-            console.log('close');
             this.$emit('close');
             this.visible = false;
         }

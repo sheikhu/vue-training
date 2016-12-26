@@ -29,14 +29,8 @@ Vue.directive('autofocus', {
 var vm = new Vue({
   el: '#app',
   data: data,
-  components: {
-    
-},
   methods: {
 
-    mounted: function() {
-      console.log(this.visible);
-    },
     createTask: function(task) {
       task.done = false;
       this.tasks.push({

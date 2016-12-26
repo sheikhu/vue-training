@@ -68,14 +68,21 @@ label.done {
         <button class="btn btn-primary" type="submit">Create task</button>
 
       </form>
-
-
-
     </div>
 
     <div class="col-md-4">
 
       <user-form :user="user"></user-form>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-8">
+      <tabs>
+        <tab name="Hello" :active="true"> Hello </tab>
+        <tab name="World">World</tab>
+      </tabs>
     </div>
   </div>
 
@@ -99,6 +106,7 @@ label.done {
 <script src="https://unpkg.com/bootstrap-vue/dist/bootstrapVue.js"></script>
 
 <script type="text/javascript" src="src/components.js"></script>
+<script type="text/javascript" src="src/tabs.js"></script>
 <script type="text/javascript" src="src/app.js"></script>
 </body>
 
