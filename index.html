@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
   <title>Vuejs training</title>
 </head>
 
@@ -19,69 +20,84 @@ ul.tasks-list {
 label.done {
   text-decoration: line-through;
 }
+
+.container {
+  padding-top: 60px;
+}
 </style>
-<div class="ui-container">
 
-  <div id="app">
 
-    <div class="ui four column grid">
+<div class="container" id="app">
 
-      <div class="column">
+  <div class="row">
+    <div class="col-md-4">
+      <alert :dismissible="true" type="success" header="Great" message="No tasks !" v-show="remainingTasks.length == 0">
 
-      </div>
-      <div class="column">
+      </alert>
 
-        <alert @close="hide" type="success" header="Great" message="No tasks !" v-if="remainingTasks.length == 0">
+    </div>
 
-        </alert>
-        <alert @close="hide" type="warning" header="Warning" message="remainingTasks.length" v-else>
+  </div>
 
-        </alert>
-        <alert @close="hide" type="error" header="Error" message="Visibility" v-if="visible || remainingTasks.length == 0">
 
-        </alert>
-        <ul class="tasks-list">
-          <li v-for="(v, index) in tasks">
-            <div class="ui checkbox">
-              <input :id="'done-' + index" type="checkbox" name="done" v-model="v.done" />
-              <label style="display:inline-block;" id="done" :for="'done-' + index" :class="{ 'done': v.done }">
-                {{ v.text | capitalize }}
-              </label>
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="tasks-list list-group">
+        <li v-for="(v, index) in tasks" class="list-group-item">
 
-              <i class="icon close" href="#" @click="deleteTask(index)"></i>
-            </div>
-          </li>
-        </ul>
-      </div>
+          <input :id="'done-' + index" type="checkbox" name="done" v-model="v.done" />
+          <label style="display:inline-block;" :id="'done-'+index" :for="'done-' + index" :class="{ 'done': v.done }" v-text="v.text">
 
-      <div class="column">
-        <form class="ui form" @submit.prevent="createTask(task)">
-          <div class="field">
-            <label>First Name</label>
-            <input type="text" name="text" v-model="task.text" placeholder="First Name" v-autofocus/>
-          </div>
-          <button class="ui button" type="submit">Create task</button>
+          </label>
 
-        </form>
-      </div>
 
-      <div class="column"></div>
+          <button type="button" class="close" aria-label="Close" @click="deleteTask(index)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+
+      <form class="form" @submit.prevent="createTask(task)">
+        <div class="form-group">
+          <label>Task name</label>
+          <input type="text" name="text" v-model="task.text" class="form-control" placeholder="Task description" v-autofocus/>
+        </div>
+        <button class="btn btn-primary" type="submit">Create task</button>
+
+      </form>
+
+
+
+    </div>
+
+    <div class="col-md-4">
+
+      <user-form :user="user"></user-form>
     </div>
   </div>
+
 
 </div>
 
 
+
 <script type="text/x-template" id="alert">
-  <div class="ui message" :class="type">
-    <i class="icon close" @click.prevent="close"></i>
-    <div class="header">{{ header }}</div>
+  <div :class="alertClass" class="dismissable fade in" role="alert" data-dismiss="alert" aria-label="Close">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong v-text="header"></strong>
     {{ message }}
   </div>
 </script>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="src/vue.js"></script>
+<script src="https://unpkg.com/bootstrap-vue/dist/bootstrapVue.js"></script>
+
 <script type="text/javascript" src="src/components.js"></script>
 <script type="text/javascript" src="src/app.js"></script>
 </body>

@@ -12,6 +12,7 @@ var data = {
 
   task: {},
 
+  user: {},
   visible: true
 };
 
@@ -23,20 +24,25 @@ Vue.directive('autofocus', {
   inserted: function(el) {
     el.focus();
   }
-})
+});
 
 var vm = new Vue({
   el: '#app',
   data: data,
-
+  components: {
+    
+},
   methods: {
 
     mounted: function() {
-      console.log(this.visible)
+      console.log(this.visible);
     },
     createTask: function(task) {
-      this.task.done = false;
-      this.tasks.push(task);
+      task.done = false;
+      this.tasks.push({
+        done: false,
+        text: task.text
+      });
       this.task = {};
     },
     deleteTask: function(i) {
@@ -61,5 +67,3 @@ var vm = new Vue({
     },
   }
 });
-
-Vue.config.devtools = true
