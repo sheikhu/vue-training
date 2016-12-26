@@ -28,7 +28,7 @@ Vue.component('tabs', {
 
 
       <li class="nav-item" v-for="tab in tabs">
-        <a @click.prevent="selectTab(tab)" class="nav-link" :class="{ active: tab.active}" data-toggle="tab" :href="tab.href" role="tab"> {{ tab.name }}</a>
+        <a :id="tab.href" @click.prevent="selectTab(tab)" class="nav-link" :class="{ active: tab.active}" data-toggle="tab" :href="tab.href" role="tab"> {{ tab.name }}</a>
       </li>
 
       </ul>
@@ -57,8 +57,9 @@ Vue.component('tabs', {
       selectTab(selectedTab) {
         this.tabs.forEach(tab => {
           tab.isActive = tab.name == selectedTab.name;
-        }
-        )
+        });
+
+        this.$emit('tab-selected', selectedTab);
       }
     }
 

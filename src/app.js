@@ -1,15 +1,11 @@
+window.Event = new Vue();
+
 var data = {
+
   tasks: [{
     text: 'Check design patterns',
     done: true
-  }, {
-    text: 'Workout',
-    done: false
-  }, {
-    text: 'Got to store',
-    done: true
   }],
-
   task: {},
 
   user: {},
@@ -29,35 +25,18 @@ Vue.directive('autofocus', {
 var vm = new Vue({
   el: '#app',
   data: data,
+
+
   methods: {
 
-    createTask: function(task) {
-      task.done = false;
-      this.tasks.push({
-        done: false,
-        text: task.text
-      });
-      this.task = {};
+    onTaskAdded(task) {
+      alert('task added');
     },
-    deleteTask: function(i) {
-      this.tasks.splice(i, 1);
+    onTaskDeleted() {
+      alert('task deleted');
     },
-
-    hide: function() {
-      this.visible = false;
+    onTabSelected(e) {
+      console.log(e)
     }
-  },
-  computed: {
-    remainingTasks: function() {
-      return this.tasks.filter(function(t) {
-        return !t.done;
-      });
-    },
-
-    completedTasks: function() {
-      return this.tasks.filter(function(t) {
-        return t.done;
-      });
-    },
   }
 });
