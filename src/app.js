@@ -16,11 +16,6 @@ Vue.filter('capitalize', function(value) {
   return value.toUpperCase();
 });
 
-Vue.directive('autofocus', {
-  inserted: function(el) {
-    el.focus();
-  }
-});
 
 var vm = new Vue({
   el: '#app',

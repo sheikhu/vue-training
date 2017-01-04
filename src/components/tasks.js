@@ -2,32 +2,32 @@ Vue.component('tasks', {
   template: '#tasks',
 
   props: {
-    list: { type: Array }
+    //list: { type: Array, required: false }
   },
 
   data() {
     return {
-      task: {},
-      tasks: []
+      tasks: [
+        {'text': 'hello', done: false}
+      ],
+      onlyRemaining: false
     }
   },
 
   created() {
-    Event.$on('task-added', (task) => {
-      this.tasks.push(task);
+
+    Event.$on('task-added', (createdTask) => {
+      console.log(createdTask)
+      this.tasks.push(createdTask);
     });
   },
 
   mounted() {
-    this.tasks = this.list
+    console.log(this);
   },
 
   methods: {
 
-    onTaskAdded(task) {
-      console.log(task)
-      this.tasks.push(task);
-    },
     deleteTask: function(i) {
       let task = this.tasks.splice(i, 1);
       Event.$emit('task-deleted', task);
@@ -35,16 +35,25 @@ Vue.component('tasks', {
   },
 
 computed: {
-  remainingTasks: function() {
+  remainingTasks() {
     return this.tasks.filter(function(t) {
       return !t.done;
     });
   },
 
-  completedTasks: function() {
+  completedTasks() {
     return this.tasks.filter(function(t) {
       return t.done;
     });
   },
+
+  data() {
+    if(!this.onlyRemaining)
+      return this.tasks;
+
+    return this.remainingTasks;
+
+  }
+
 }
 });

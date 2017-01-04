@@ -3,10 +3,12 @@ Vue.component('taskForm', {
 
   template: `
   <form class="form" @submit.prevent="createTask(task)">
-    <div class="form-group">
-      <label>Task name</label>
-      <input type="text" name="text" v-model="task.text" class="form-control" placeholder="Task description" v-autofocus/>
-    </div>
+    <fieldset>
+      <legend>Create task </legend>
+      <div class="form-group">
+        <input type="text" name="text" v-model="task.text" class="form-control" placeholder="Task description"/>
+      </div>
+    </fieldset>
     <button class="btn btn-primary" type="submit">Create task</button>
 
   </form>`,
@@ -24,12 +26,14 @@ Vue.component('taskForm', {
       //   done: false,
       //   text: task.text
       // });
-      this.task = {};
+
 
       Event.$emit('task-added', {
           done: false,
           text: task.text
         });
+
+      this.task = {};
     }
   }
 
